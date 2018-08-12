@@ -11,6 +11,7 @@ import meetup from '@/components/meetups/meetup.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode:"history",
   routes: [
     {
       path: '/meetups',
@@ -47,6 +48,7 @@ export default new Router({
       path: '/signin',
       name: 'signin',
       component: signin
-    }
+    },
+
   ]
 })

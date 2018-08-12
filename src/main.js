@@ -2,10 +2,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { store } from './store'
-
+import DateFilter from './filters/date'
 import {
   Vuetify,
   VApp,
+  VDatePicker,
   VTextField,
   VCard,
   VNavigationDrawer,
@@ -16,6 +17,8 @@ import {
   VGrid,
   VToolbar,
   VCarousel,
+  VTimePicker,
+  VTextArea,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -23,7 +26,10 @@ import '../node_modules/vuetify/src/stylus/app.styl'
 Vue.use(Vuetify, {
   components: {
     VApp,
+    VTextArea,
     VTextField,
+    VTimePicker,
+    VDatePicker,
     VCard,
     VNavigationDrawer,
     VFooter,
@@ -47,7 +53,7 @@ Vue.use(Vuetify, {
 })
 
 Vue.config.productionTip = false
-
+Vue.filter('date', DateFilter)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
