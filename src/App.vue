@@ -32,7 +32,10 @@
       </v-toolbar>
     
     <main>
-      <router-view></router-view>
+      <transition name="bounce">
+   <router-view/>
+</transition>
+      <!-- <router-view></router-view> -->
     </main>
   </v-app>
 </template>
@@ -42,14 +45,27 @@ export default {
   data () {
     return {
       drawer:false,
-      menuItems:[
+      
+  }
+},
+computed:{
+  menuItems () {
+    let menuItems = [
+       {title: 'SignUp', icon: 'lock', link: '/signup' },
+       {title: 'SignIn', icon: 'lock_open', link: '/signin'}]
+    if (this.userIsAuthenticated) {
+      menuItems = [
       {title: 'Meetups', icon: 'supervisor_account', link: '/meetups'},
       {title: 'Create', icon: 'event', link: '/meetups/create'},
-      {title: 'SignUp', icon: 'lock', link: '/signup' },
-      {title: 'SignIn', icon: 'lock_open', link: '/signin'},
-      {title: 'Profile', icon: 'face', link: '/users/profile'}
-      ]
-  }
+      {title: 'Profile', icon: 'face', link: '/users/profile'}]
+    }
+    return menuItems
+ },
+ userIsAuthenticated(){
+  return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+ }
 }
+
 }
+
 </script>
