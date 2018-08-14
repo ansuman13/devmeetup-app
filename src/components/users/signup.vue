@@ -1,5 +1,10 @@
 <template>
 	<v-container>
+		<v-layout row wrap v-if="error">
+		  <v-flex xs12 sm6 offset-sm3>
+		    <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+		  </v-flex>
+		</v-layout>
 	  <v-layout row wrap>
 	    <v-flex xs12 sm6 offset-sm3>
 	      <v-card-text>
@@ -84,6 +89,10 @@
 
 		},
 	methods:{
+		onDismissed() {
+			console.log('dismissed')
+			this.$store.dispatch('clearError')
+		},
 		onSignUp() {
 			this.$store.dispatch('signUserUp', {email:this.email, password:this.password})
 			console.log('onSignUp')
