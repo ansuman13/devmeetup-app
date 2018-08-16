@@ -7,6 +7,7 @@ import DateFilter from './filters/date'
 import alertComp from './components/shared/alert.vue'
 import {
   Vuetify,
+  VProgressCircular,
   VAlert,
   VApp,
   VDatePicker,
@@ -31,6 +32,7 @@ Vue.use(Vuetify, {
     VApp,
     VAlert,
     VTextArea,
+    VProgressCircular,
     VTextField,
     VTimePicker,
     VDatePicker,
@@ -73,5 +75,6 @@ new Vue({
     projectId: "devmeetup-app-df4e6",
     storageBucket: "devmeetup-app-df4e6.appspot.com",
     })
+    this.$store.dispatch('loadedMeetups')
   } 
 })

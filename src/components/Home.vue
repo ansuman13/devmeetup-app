@@ -1,16 +1,28 @@
 <template>
 	<v-container>
 	  <v-layout row wrap>
-	    <v-flex xs12 sm6 class="text-sm-right text-xs-center">
-	      <v-btn color="success" to='/meetups' large>Explore Meetups</v-btn>
+	    <v-flex xs12 sm6 
+	    class="text-sm-right text-xs-center">
+	      <v-btn large color="success" to='/meetups' large>Explore Meetups</v-btn>
 	    </v-flex>
 	    <v-flex xs12 sm6 class="text-sm-left  text-xs-center">
-	      <v-btn color="success" large to="/meetups/create">Create Meetup</v-btn>
+	      <v-btn large color="success" large to="/meetups/create">Create Meetup</v-btn>
 	    </v-flex>
 	  </v-layout >
-	  <v-layout row wrap class="mt-3">
+	  <v-layout row wrap>
+	    <v-flex xs12 class="text-xs-center">
+	      <v-progress-circular
+            indeterminate
+            color="primary--text"
+            :width="7"
+            :size="70"
+            v-if="loading"
+    ></v-progress-circular>
+	    </v-flex>
+	  </v-layout>
+	  <v-layout row wrap class="mt-3" v-if="!loading">
 	    <v-flex xs12>
-	       <v-carousel>
+	       <v-carousel style="cursor: pointer;" >
             <v-carousel-item
               v-for="item in meetups"
               :key="item.id"
@@ -36,8 +48,12 @@
 		computed: {
 			meetups () {
 				return this.$store.getters.featuredMeetups
-			}
-		},
+			},
+		
+		loading () {
+        return this.$store.getters.loading
+      }
+  },
 		methods:{
 			onMeetupClick(id){
 				this.$router.push('meetups/'+id);
