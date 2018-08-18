@@ -5,6 +5,7 @@ import * as firebase from 'firebase'
 import { store } from './store'
 import DateFilter from './filters/date'
 import alertComp from './components/shared/alert.vue'
+
 import {
   Vuetify,
   VProgressCircular,
@@ -75,6 +76,12 @@ new Vue({
     projectId: "devmeetup-app-df4e6",
     storageBucket: "devmeetup-app-df4e6.appspot.com",
     })
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.$store.dispatch('autoSignIn',user)
+      }
+    })
     this.$store.dispatch('loadedMeetups')
+
   } 
 })
